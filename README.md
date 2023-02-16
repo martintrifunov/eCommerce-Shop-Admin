@@ -8,7 +8,7 @@ Admin web application that connects to eCommerce Shop.
   title="Optional title"
   style="display: inline-block; margin: auto auto; max-width: 1080px">
 
-## Order Page
+## Orders Page
 
 <img
   src="https://imgur.com/W12LWeX.png"
@@ -16,7 +16,7 @@ Admin web application that connects to eCommerce Shop.
   title="Optional title"
   style="display: inline-block; margin: auto auto; max-width: 1080px">
 
-## Product Page
+## Products Page
 
 <img
   src="https://imgur.com/ErfMebG.png"
