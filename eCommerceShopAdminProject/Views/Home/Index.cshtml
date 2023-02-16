@@ -1,0 +1,104 @@
+﻿@model List<eCommerceShopAdminProject.Models.Order>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h3 class="text-center mb-2">Insights of Latest Product Sales:</h3>
+    <div class="row">
+
+        <div class="col-sm-6">
+            <div class="card mt-4">
+                <div class="card-header">
+                    Pie Chart
+                </div>
+                <div class="card-body" style="height: 25rem;">
+                    <canvas class="mt-1 ml-5" id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="card mt-4">
+                <div class="card-header">
+                    Bar Chart
+                </div>
+                <div class="card-body" style="height: 25rem;">
+                    <canvas class="mt-1" id="barChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const barChart = document.getElementById('barChart').getContext('2d');
+    const pieChart = document.getElementById('pieChart').getContext('2d');
+
+    new Chart(barChart, {
+        type: 'bar',
+        data: {
+            labels: [@for (int i = 0; i < Model.Count; i++)
+                        {
+                            var item = Model[i];
+
+                            @:'@item.User.UserName',
+                        }
+                    ],
+            datasets: [{
+                label: '# of Products Sold',
+                data: [
+                    @for(int i = 0; i < Model.Count; i++)
+                    {
+                        var item = Model[i];
+                        @: @item.Products.Count,
+                    }
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    new Chart(pieChart, {
+        type: 'pie',
+        data: {
+            labels: [@for (int i = 0; i < Model.Count; i++)
+                        {
+                            var item = Model[i];
+
+                            @:'@item.User.UserName',
+                        }
+                    ],
+            datasets: [{
+                label: '# of Products Sold',
+                data: [
+                    @for(int i = 0; i < Model.Count; i++)
+                    {
+                        var item = Model[i];
+                        @: @item.Products.Count,
+                    }
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+

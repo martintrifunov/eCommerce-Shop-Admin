@@ -1,0 +1,105 @@
+﻿@model List<eCommerceShopAdminProject.Models.Product>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .card-footer {
+            background: white;
+            border: none;
+        }
+    </style>
+ </head>
+
+<div class="container mt-5 mb-5 col-10 col-sm-8 col-md-6 col-lg-5">
+    <h3 class="text-center mb-5">Import Products:</h3>
+
+    <form asp-controller="Product" asp-action="ImportProducts" method="post" enctype="multipart/form-data">
+        <div class="form-group mb-5">
+            <input type="file" name="file" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-danger btn-block">Import</button>
+    </form>
+</div>
+
+<div class="container">
+    <h3 class="text-center mb-5">Currently Active Products:</h3>
+
+    <div align="center" class="mb-5">
+        <button class="btn btn-outline-danger filter-button mb-3 mr-2 active" data-filter="all">All</button>
+        <button class="btn btn-outline-danger filter-button mb-3 mr-2" data-filter="Smartphone">Smartphones</button>
+        <button class="btn btn-outline-danger filter-button mb-3 mr-2" data-filter="Smartwatch">Smartwatches</button>
+        <button class="btn btn-outline-danger filter-button mb-3 mr-2" data-filter="Headphones">Headphones</button>
+        <button class="btn btn-outline-danger filter-button mb-3" data-filter="Microphone">Microphones</button>
+    </div>
+    <div class="row">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var item = Model[i];
+
+
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 filter @item.Category">
+            <div class="card mb-5" style="height: 47rem;">
+                <img src="@item.Image" class="card-img-top" style="width: 100%; height: 360px">
+                <div class="card-body pt-0 px-0">
+                    <div class="d-flex flex-row justify-content-between mb-0 px-3">
+                        <h6 class="text-muted">STARTING AT</h6>
+                        <h6>&dollar;@item.Price</h6>
+                    </div>
+                    <hr class="mt-2 mx-3">
+                    <div class="d-flex flex-row justify-content-between px-3 pb-4">
+                        <div class="d-flex flex-column"><h6 class="text-muted">RATING</h6></div>
+                        <div class="d-flex flex-column">
+                            <h6 class="mb-0">
+                                @for (int j = 0; j < item.Rating; j++)
+                                {
+                                    @:<i class="fa-solid fa-star"></i>
+                                }
+                            </h6>
+                            <small class="text-muted text-right">(@item.Rating/5)</small>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between p-3 mid">
+                        <div class="d-flex flex-column"><h6 class="text-muted mb-1">DESCRIPTION</h6><div class="d-flex flex-row"><small>@item.Description</small></div></div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary btn-block" asp-controller="Product" asp-action="GetProduct" asp-route-productId="@item.Id"><small>Edit</small></a>
+                    <a class="btn btn-danger btn-block" asp-action="DeleteProduct" asp-route-productId="@item.Id"><small>Delete</small></a>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+    <script>
+            $(document).ready(function () {
+
+                $(".filter-button").click(function () {
+                    var value = $(this).attr('data-filter');
+
+                    if ($(".filter-button").removeClass("active")) {
+                        $(this).removeClass("active");
+                    }
+                    $(this).addClass("active");
+
+                    if (value == "all") {
+                        $('.filter').show('1000');
+                    }
+                    else {
+                        $(".filter").not('.' + value).hide('3000');
+                        $('.filter').filter('.' + value).show('3000');
+
+                    }
+                });
+
+
+
+            });
+    </script>
+}

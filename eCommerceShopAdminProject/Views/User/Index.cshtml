@@ -1,0 +1,14 @@
+﻿@model List<eCommerceShopAdminProject.Models.User>
+
+<div class="container mt-5 mb-5 col-10 col-sm-8 col-md-6 col-lg-5">
+    <h3 class="text-center mb-5">Import Users:</h3>
+
+    <form asp-controller="User" asp-action="ImportUsers" method="post" enctype="multipart/form-data">
+        <div class="form-group mb-5">
+            <input type="file" name="file" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-danger btn-block">Import</button>
+    </form>
+</div>
+

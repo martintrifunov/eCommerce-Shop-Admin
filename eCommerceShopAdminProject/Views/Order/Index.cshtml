@@ -1,0 +1,30 @@
+﻿@model List<eCommerceShopAdminProject.Models.Order>
+
+<h3 class="text-center mt-5 mb-5">Completed Orders:</h3>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">No. of Products</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                var item = Model[i];
+            <tr>
+                <th scope="row">@(i+1)</th>
+                <td>@item.User.UserName</td>
+                <td>@item.Products.Count</td>
+                <td><a asp-route-orderId="@item.Id" asp-action="OrderDetails" class="btn btn-primary">Order Details</a></td>
+                <td><a asp-route-orderId="@item.Id" asp-action="GenerateInvoice" class="btn btn-danger">Generate Invoice</a></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

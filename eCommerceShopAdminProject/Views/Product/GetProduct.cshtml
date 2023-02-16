@@ -1,0 +1,56 @@
+﻿@model eCommerceShopAdminProject.Models.Product
+
+<div class="container mt-5 mb-5 col-10 col-sm-8 col-md-6 col-lg-5">
+    <h3 class="text-center mb-4">Edit Product:</h3>
+    <form asp-controller="Product" asp-action="EditProduct" method="post" enctype="multipart/form-data">
+        <input type="text" asp-for="Id" />
+        <div class="form-group mb-4">
+            <label asp-for="Name" class="control-label"></label>
+            <br>
+            <div class="mb-4">
+                <input type="text" value="@Model.Name" asp-for="Name" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image" class="control-label"></label>
+            <br>
+            <div class="mb-4">
+                <input type="text" value="@Model.Image" asp-for="Image" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <br>
+            <div class="mb-4">
+                <input type="text" value="@Model.Description" asp-for="Description" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Rating" class="control-label"></label>
+            <br>
+            <div class="mb-4">
+                <input type="text" value="@Model.Rating" asp-for="Rating" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <br>
+            <div class="mb-4">
+                <input type="text" value="@Model.Price" asp-for="Price" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Category" class="control-label"></label>
+            <br>
+            <div class="mb-4">
+                <input type="text" value="@Model.Category" asp-for="Category" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="mb-4 btn-submit">
+                <button type="submit" class="btn btn-danger btn-block">Save</button>
+            </div>
+        </div>
+    </form>
+</div>  
